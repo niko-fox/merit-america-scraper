@@ -1,0 +1,224 @@
+# Merit America career tracks (verticals) → junior / lower-intermediate
+# title keywords. Matching is case-insensitive, whole-word substring against
+# the job title. A title is assigned to the FIRST vertical whose keyword hits;
+# if none hit, or an exclusion pattern hits, the job is dropped.
+#
+# Keep keywords junior/entry/associate/specialist/analyst/coordinator level.
+# Senior/lead/principal/manager+/director+ are removed via `exclusions`.
+
+verticals:
+  it_support:
+    - help desk
+    - helpdesk
+    - help desk technician
+    - desktop support
+    - desktop support technician
+    - it support
+    - it support specialist
+    - it support technician
+    - technical support
+    - technical support specialist
+    - technical support representative
+    - service desk
+    - service desk analyst
+    - it technician
+    - it specialist
+    - support analyst
+    - support technician
+    - systems support
+    - field support technician
+    - it help desk
+    - computer technician
+    - end user support
+
+  data_analytics:
+    - data analyst
+    - junior data analyst
+    - data analytics
+    - business analyst
+    - business intelligence analyst
+    - bi analyst
+    - reporting analyst
+    - analytics analyst
+    - data technician
+    - data quality analyst
+    - operations analyst
+    - marketing analyst
+    - financial analyst
+    - research analyst
+    - insights analyst
+    - data specialist
+    - sql analyst
+    - tableau developer
+    - power bi analyst
+
+  ux_design:
+    - ux designer
+    - ui designer
+    - ux/ui designer
+    - ui/ux designer
+    - junior ux designer
+    - junior ui designer
+    - product designer
+    - junior product designer
+    - ux researcher
+    - user researcher
+    - interaction designer
+    - visual designer
+    - web designer
+    - digital designer
+    - ux/ui design
+    - associate product designer
+    - design technician
+
+  cybersecurity:
+    - security analyst
+    - cybersecurity analyst
+    - cyber security analyst
+    - soc analyst
+    - information security analyst
+    - infosec analyst
+    - security operations analyst
+    - junior security analyst
+    - it security analyst
+    - security specialist
+    - security technician
+    - vulnerability analyst
+    - grc analyst
+    - security operations center analyst
+    - identity and access analyst
+    - threat analyst
+
+  project_management:
+    - project coordinator
+    - project management coordinator
+    - junior project manager
+    - associate project manager
+    - assistant project manager
+    - project analyst
+    - project specialist
+    - pmo coordinator
+    - pmo analyst
+    - program coordinator
+    - scrum master
+    - associate scrum master
+    - project administrator
+    - project control analyst
+    - implementation coordinator
+
+  human_resources:
+    - hr coordinator
+    - human resources coordinator
+    - hr generalist
+    - human resources generalist
+    - hr assistant
+    - human resources assistant
+    - hr specialist
+    - hr administrator
+    - recruiting coordinator
+    - recruitment coordinator
+    - talent acquisition coordinator
+    - talent acquisition specialist
+    - people operations coordinator
+    - people operations specialist
+    - hr analyst
+    - benefits coordinator
+    - payroll coordinator
+    - onboarding specialist
+    - recruiter
+
+  supply_chain:
+    - supply chain analyst
+    - supply chain coordinator
+    - supply chain specialist
+    - logistics coordinator
+    - logistics analyst
+    - logistics specialist
+    - procurement analyst
+    - procurement coordinator
+    - procurement specialist
+    - inventory analyst
+    - inventory coordinator
+    - inventory specialist
+    - planning analyst
+    - demand planner
+    - materials coordinator
+    - purchasing coordinator
+    - purchasing analyst
+    - warehouse coordinator
+    - fulfillment coordinator
+
+  semiconductor:
+    - semiconductor technician
+    - process technician
+    - fab technician
+    - equipment technician
+    - manufacturing technician
+    - test technician
+    - production technician
+    - wafer technician
+    - process engineering technician
+    - cleanroom technician
+    - assembly technician
+    - quality technician
+    - maintenance technician
+    - associate process engineer
+    - manufacturing associate
+    - semiconductor operator
+    - equipment operator
+
+  operations:
+    - operations analyst
+    - operations coordinator
+    - operations associate
+    - operations specialist
+    - business operations analyst
+    - business operations associate
+    - operations administrator
+    - process analyst
+    - process coordinator
+    - workflow coordinator
+    - administrative coordinator
+    - office coordinator
+
+# Two-tier exclusions, both case-insensitive regex with word boundaries.
+#
+# hard_exclusions: title is dropped if ANY match — no exceptions. Senior+ and
+#   people-leadership above lower-intermediate.
+# soft_exclusions: dropped UNLESS the title also contains a junior_signal.
+#   This keeps "Junior Project Manager" / "Associate Project Manager" while
+#   still dropping a bare "IT Support Manager".
+hard_exclusions:
+  - '\bsenior\b'
+  - '\bsr\.?\b'
+  - '\blead\b'
+  - '\bprincipal\b'
+  - '\bstaff\b'
+  - '\bdirector\b'
+  - '\bhead of\b'
+  - '\bvp\b'
+  - '\bvice[- ]president\b'
+  - '\bchief\b'
+  - '\bsvp\b'
+  - '\bevp\b'
+  - '\bfounder\b'
+  - '\bowner\b'
+  - '\barchitect\b'
+  - '\biii\b'        # level III and up
+  - '\biv\b'
+  - '\bexpert\b'
+
+soft_exclusions:
+  - '\bmanager\b'
+  - '\bsupervisor\b'
+
+junior_signals:
+  - '\bjunior\b'
+  - '\bjr\.?\b'
+  - '\bassociate\b'
+  - '\bassistant\b'
+  - '\bentry[- ]level\b'
+  - '\bintern\b'
+  - '\btrainee\b'
+  - '\bapprentice\b'
+  - '\bcoordinator\b'

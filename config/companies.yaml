@@ -1,0 +1,317 @@
+# Merit America employer tier registry. Fuzzy-matched (token_set_ratio) against
+# the scraped company name. Unknown companies fall through to Brave employer
+# intel (merit/employer_intel.py) and are logged to
+# data/merit_unmatched_companies.log for promotion here.
+#
+# Tiers:
+#   S — household-name mega-caps + sector-defining blue chips
+#   A — very strong national brands / clear leaders within a vertical
+#   B — solid, well-known mid-caps
+#   C — default (no entry needed)
+#
+# Seeded across all nine Merit tracks (IT support, data analytics, UX, cyber,
+# PM, HR, supply chain, semiconductor, operations). Expand aggressively.
+
+fuzzy_threshold: 88
+
+companies:
+  # ---------- Tier S: mega-cap tech + sector-defining blue chips ----------
+  - canonical: Apple
+    tier: S
+    aliases: [Apple Inc]
+  - canonical: Microsoft
+    tier: S
+    aliases: [MSFT]
+  - canonical: Google
+    tier: S
+    aliases: [Alphabet, YouTube, Google Cloud]
+  - canonical: Amazon
+    tier: S
+    aliases: [AWS, Amazon Web Services, Amazon.com]
+  - canonical: Meta
+    tier: S
+    aliases: [Facebook, Meta Platforms, Instagram]
+  - canonical: NVIDIA
+    tier: S
+    aliases: [Nvidia Corporation]
+  - canonical: Intel
+    tier: S
+    aliases: [Intel Corporation]
+  - canonical: TSMC
+    tier: S
+    aliases: [Taiwan Semiconductor, Taiwan Semiconductor Manufacturing]
+  - canonical: Tesla
+    tier: S
+    aliases: [Tesla Motors]
+  - canonical: SpaceX
+    tier: S
+    aliases: [Space Exploration Technologies]
+  - canonical: Netflix
+    tier: S
+    aliases: []
+  - canonical: Nvidia
+    tier: S
+    aliases: []
+  - canonical: JPMorgan Chase
+    tier: S
+    aliases: [JPMorgan, JP Morgan, Chase, JPMorgan Chase & Co]
+  - canonical: Goldman Sachs
+    tier: S
+    aliases: [Goldman]
+  - canonical: Boeing
+    tier: S
+    aliases: [The Boeing Company]
+  - canonical: Lockheed Martin
+    tier: S
+    aliases: [Lockheed]
+  - canonical: Walmart
+    tier: S
+    aliases: [Walmart Inc, Walmart Labs]
+  - canonical: Nike
+    tier: S
+    aliases: []
+  - canonical: OpenAI
+    tier: S
+    aliases: []
+  - canonical: Anthropic
+    tier: S
+    aliases: []
+  - canonical: Disney
+    tier: S
+    aliases: [The Walt Disney Company, Walt Disney]
+
+  # ---------- Tier A: strong national brands / vertical leaders ----------
+  # Tech / cloud / SaaS
+  - canonical: Salesforce
+    tier: A
+    aliases: [Salesforce.com]
+  - canonical: Oracle
+    tier: A
+    aliases: []
+  - canonical: IBM
+    tier: A
+    aliases: [International Business Machines]
+  - canonical: Adobe
+    tier: A
+    aliases: []
+  - canonical: Cisco
+    tier: A
+    aliases: [Cisco Systems]
+  - canonical: SAP
+    tier: A
+    aliases: []
+  - canonical: Dell
+    tier: A
+    aliases: [Dell Technologies]
+  - canonical: HP
+    tier: A
+    aliases: [Hewlett-Packard, HP Inc, Hewlett Packard Enterprise, HPE]
+  - canonical: ServiceNow
+    tier: A
+    aliases: []
+  - canonical: Workday
+    tier: A
+    aliases: []
+  - canonical: Atlassian
+    tier: A
+    aliases: []
+  # Semiconductor
+  - canonical: AMD
+    tier: A
+    aliases: [Advanced Micro Devices]
+  - canonical: Qualcomm
+    tier: A
+    aliases: []
+  - canonical: Micron
+    tier: A
+    aliases: [Micron Technology]
+  - canonical: Applied Materials
+    tier: A
+    aliases: []
+  - canonical: ASML
+    tier: A
+    aliases: []
+  - canonical: Texas Instruments
+    tier: A
+    aliases: [TI]
+  - canonical: GlobalFoundries
+    tier: A
+    aliases: [Global Foundries]
+  - canonical: Broadcom
+    tier: A
+    aliases: []
+  - canonical: Analog Devices
+    tier: A
+    aliases: []
+  - canonical: Lam Research
+    tier: A
+    aliases: []
+  - canonical: KLA
+    tier: A
+    aliases: [KLA Corporation, KLA-Tencor]
+  - canonical: Samsung
+    tier: A
+    aliases: [Samsung Electronics, Samsung Semiconductor]
+  # Supply chain / logistics
+  - canonical: FedEx
+    tier: A
+    aliases: [Federal Express]
+  - canonical: UPS
+    tier: A
+    aliases: [United Parcel Service]
+  - canonical: Target
+    tier: A
+    aliases: [Target Corporation]
+  - canonical: Costco
+    tier: A
+    aliases: [Costco Wholesale]
+  - canonical: Procter & Gamble
+    tier: A
+    aliases: [P&G, Procter and Gamble]
+  - canonical: PepsiCo
+    tier: A
+    aliases: [Pepsi]
+  - canonical: Coca-Cola
+    tier: A
+    aliases: [Coca Cola, The Coca-Cola Company]
+  - canonical: Maersk
+    tier: A
+    aliases: [A.P. Moller-Maersk]
+  - canonical: Caterpillar
+    tier: A
+    aliases: []
+  # Consulting / PM / HR / operations
+  - canonical: Deloitte
+    tier: A
+    aliases: []
+  - canonical: Accenture
+    tier: A
+    aliases: []
+  - canonical: PwC
+    tier: A
+    aliases: [PricewaterhouseCoopers]
+  - canonical: EY
+    tier: A
+    aliases: [Ernst & Young, Ernst and Young]
+  - canonical: KPMG
+    tier: A
+    aliases: []
+  - canonical: McKinsey
+    tier: A
+    aliases: [McKinsey & Company]
+  - canonical: Booz Allen Hamilton
+    tier: A
+    aliases: [Booz Allen]
+  # Cybersecurity
+  - canonical: Palo Alto Networks
+    tier: A
+    aliases: [Palo Alto]
+  - canonical: CrowdStrike
+    tier: A
+    aliases: []
+  - canonical: Fortinet
+    tier: A
+    aliases: []
+  - canonical: Okta
+    tier: A
+    aliases: []
+  - canonical: Zscaler
+    tier: A
+    aliases: []
+  - canonical: Cloudflare
+    tier: A
+    aliases: []
+  # Aerospace / defense / industrial (semiconductor + supply chain + ops)
+  - canonical: Raytheon
+    tier: A
+    aliases: [RTX, Raytheon Technologies]
+  - canonical: Northrop Grumman
+    tier: A
+    aliases: [Northrop]
+  - canonical: General Dynamics
+    tier: A
+    aliases: []
+  - canonical: Honeywell
+    tier: A
+    aliases: []
+  - canonical: GE
+    tier: A
+    aliases: [General Electric, GE Aerospace, GE Vernova]
+  # Finance / health (data + ops + HR employers)
+  - canonical: Bank of America
+    tier: A
+    aliases: [BofA]
+  - canonical: Wells Fargo
+    tier: A
+    aliases: []
+  - canonical: Capital One
+    tier: A
+    aliases: []
+  - canonical: UnitedHealth Group
+    tier: A
+    aliases: [UnitedHealth, Optum]
+  - canonical: CVS Health
+    tier: A
+    aliases: [CVS]
+
+  # ---------- Tier B: solid, well-known mid-caps ----------
+  - canonical: Cognizant
+    tier: B
+    aliases: []
+  - canonical: Infosys
+    tier: B
+    aliases: []
+  - canonical: Tata Consultancy Services
+    tier: B
+    aliases: [TCS]
+  - canonical: Wipro
+    tier: B
+    aliases: []
+  - canonical: DXC Technology
+    tier: B
+    aliases: [DXC]
+  - canonical: Insight Global
+    tier: B
+    aliases: []
+  - canonical: TEKsystems
+    tier: B
+    aliases: []
+  - canonical: Robert Half
+    tier: B
+    aliases: []
+  - canonical: ADP
+    tier: B
+    aliases: [Automatic Data Processing]
+  - canonical: Paychex
+    tier: B
+    aliases: []
+  - canonical: C.H. Robinson
+    tier: B
+    aliases: [CH Robinson]
+  - canonical: XPO Logistics
+    tier: B
+    aliases: [XPO]
+  - canonical: Ryder
+    tier: B
+    aliases: [Ryder System]
+  - canonical: Flex
+    tier: B
+    aliases: [Flextronics]
+  - canonical: Jabil
+    tier: B
+    aliases: []
+  - canonical: ON Semiconductor
+    tier: B
+    aliases: [onsemi]
+  - canonical: Skyworks
+    tier: B
+    aliases: [Skyworks Solutions]
+  - canonical: Rapid7
+    tier: B
+    aliases: []
+  - canonical: Tenable
+    tier: B
+    aliases: []
+  - canonical: Optiv
+    tier: B
+    aliases: []

@@ -1,0 +1,15 @@
+__pycache__/
+*.pyc
+*.pyo
+.venv/
+venv/
+.env
+.DS_Store
+
+# Transient working artifacts
+data/merit_unmatched_companies.log
+
+# Ignore all scraper output except the committed master CSV.
+output/*
+!output/merit_jobs.csv
+!output/.gitkeep

@@ -1,0 +1,16 @@
+# US state (2-letter) → region bucket for Merit America.
+#
+# Four target regions. Mountain-West / border states are folded into the
+# nearest bucket — edit freely after the first real run.
+#
+# Remote handling: a posting that names a US city/state is classified by that
+# state. A pure "Remote (United States)" posting with no state cannot be
+# regionally placed; `drop_unplaceable_remote: true` drops it.
+
+drop_unplaceable_remote: true
+
+regions:
+  West Coast: [CA, OR, WA, NV, AZ, HI, AK, ID, MT, WY]
+  Midwest:    [IL, IN, MI, OH, WI, IA, KS, MN, MO, NE, ND, SD, CO]
+  South:      [TX, FL, GA, NC, SC, VA, TN, AL, MS, LA, AR, OK, KY, WV, MD, DC, DE, NM, UT]
+  East Coast: [NY, NJ, PA, MA, CT, RI, NH, VT, ME]

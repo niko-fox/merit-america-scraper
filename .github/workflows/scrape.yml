@@ -1,0 +1,83 @@
+name: scrape-merit
+
+on:
+  schedule:
+    # 12:00 UTC = 07:00 ET (standard) / 08:00 ET (DST) — Mondays.
+    - cron: "0 12 * * 1"
+  workflow_dispatch:
+    inputs:
+      dry_run:
+        description: "Dry run (print only, no CSV write / dedup insert)"
+        type: boolean
+        default: false
+      limit:
+        description: "Cap total jobs scraped (smoke test). Blank = no cap."
+        type: string
+        default: ""
+      per_region:
+        description: "Max jobs kept per region"
+        type: string
+        default: "55"
+      posted_within_days:
+        description: "Drop jobs older than N days"
+        type: string
+        default: "14"
+      resume:
+        description: "Keep existing partial file (crash recovery)"
+        type: boolean
+        default: false
+
+permissions:
+  contents: write        # commit master CSV + seen/cache DBs back
+
+concurrency:
+  group: scrape-merit
+  cancel-in-progress: false
+
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: pip
+
+      - name: Install deps
+        run: pip install -r requirements.txt
+
+      - name: Run Merit scraper
+        env:
+          BRAVE_API_KEY: ${{ secrets.BRAVE_API_KEY }}
+        run: |
+          ARGS=""
+          if [[ "${{ inputs.dry_run }}" == "true" ]]; then ARGS="$ARGS --dry-run"; fi
+          if [[ -n "${{ inputs.limit }}" ]]; then ARGS="$ARGS --limit ${{ inputs.limit }}"; fi
+          if [[ -n "${{ inputs.per_region }}" ]]; then ARGS="$ARGS --per-region ${{ inputs.per_region }}"; fi
+          if [[ -n "${{ inputs.posted_within_days }}" ]]; then
+            ARGS="$ARGS --posted-within-days ${{ inputs.posted_within_days }}"
+          fi
+          if [[ "${{ inputs.resume }}" == "true" ]]; then ARGS="$ARGS --resume"; fi
+          python -m merit.main $ARGS
+
+      # Always upload the master CSV — survives even a mid-run timeout/failure,
+      # since the in-code 5-min flush keeps output/merit_jobs.csv current.
+      - name: Upload master CSV artifact
+        if: ${{ always() && inputs.dry_run != true }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: merit-jobs-${{ github.run_id }}
+          path: |
+            output/merit_jobs.csv
+            output/_partial/all_scored.csv
+          if-no-files-found: ignore
+
+      - name: Commit master CSV + dedup/cache DBs
+        if: ${{ !inputs.dry_run }}
+        uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: "chore(merit): update master CSV + seen/employer-cache DBs"
+          file_pattern: "output/merit_jobs.csv data/merit_seen.sqlite data/merit_employer_cache.sqlite"
